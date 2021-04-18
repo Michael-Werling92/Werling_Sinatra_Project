@@ -9,7 +9,7 @@ class InventionsController < ApplicationController
         end
     end
     
-    get "inventions/new" do
+    get "/inventions/new" do
         if logged_in?
             @invention = Inventions.find_by_id(params[:id])
             erb :"inventions/new"
