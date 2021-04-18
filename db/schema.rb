@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_233233) do
+ActiveRecord::Schema.define(version: 2021_04_18_175919) do
 
   create_table "inventions", force: :cascade do |t|
     t.string "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2021_04_17_233233) do
     t.string "relevant_field"
     t.datetime "date_of_conception"
     t.boolean "patent_filed"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

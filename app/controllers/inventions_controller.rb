@@ -27,12 +27,12 @@ class InventionsController < ApplicationController
         end
     end
 
-    post "/inventions"
+    post "/inventions" do
         invention = Inventions.new(params)
         if invention.save
-            redirect "invention/#{invention.id}"
+            redirect "inventions/#{invention.id}"
         else
-            redirect "invention/new"
+            redirect "inventions/new"
         end
     end
 
