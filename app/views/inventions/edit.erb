@@ -10,14 +10,8 @@
     <p> Description: <input type="text" name="description" value="<%= @invention.description %>"></p>
 
     <p> Relevant Field or Industry: <input type="text" name="relevant_field" value="<%= @invention.relevant_field %>"></p>
-    <br><br>
     
-    Has a patent application been filed?:
-    <input type="radio" name="patent_filed" id="intrusiveChoice1" value="true">
-    <label for="intrusiveChoice1">YES</label>
-
-    <input type="radio" name="patent_filed" id="intrusiveChoice2" value="false">
-    <label for="intrusiveChoice2">NO</label>
+    <p> <label for="patent_filed">Has this patent been filed?</label> <input type="checkbox" name="patent_filed" value="<%= @invention.patent_filed%>"></p>
 
     <br><br>
     
