@@ -61,6 +61,12 @@ class InventionsController < ApplicationController
         end
     end
 
+    delete "inventions/:id" do
+        @invention = Inventions.find_by_id(params[:id])
+        @invention.destroy
+        redirect "/inventions"
+    end
+
 
 
 end
