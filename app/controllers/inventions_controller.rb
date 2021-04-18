@@ -5,7 +5,7 @@ class InventionsController < ApplicationController
             @invention = Inventions.all
             erb :"inventions/index"
         else
-            redirect "/login"
+            redirect "/"
         end
     end
     
@@ -14,7 +14,7 @@ class InventionsController < ApplicationController
             @invention = Inventions.find_by_id(params[:id])
             erb :"inventions/new"
         else
-            redirect "/login"
+            redirect "/"
         end
     end
 
@@ -23,7 +23,7 @@ class InventionsController < ApplicationController
             @invention = Inventions.find_by_id(params[:id])
             erb :"inventions/show"
         else
-            redirect "/login"
+            redirect "/"
         end
     end
 
@@ -46,7 +46,7 @@ class InventionsController < ApplicationController
                 erb :"inventions/edit"
             end
         else
-            redirect "/login"
+            redirect "/"
         end
     end
 
@@ -64,11 +64,11 @@ class InventionsController < ApplicationController
     delete "/inventions/:id" do
         @invention = Inventions.find_by_id(params[:id])
         binding.pry
-        if @invention.user_id = current_user.id
+        if @invention.user_id == current_user.id
             @invention.destroy
             redirect "/inventions"
         else
-            redirect "/inventions/#{@invention.id}"
+            redirect "/inventions"
         end
     end
 
