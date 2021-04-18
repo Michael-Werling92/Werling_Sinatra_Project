@@ -51,7 +51,7 @@ class InventionsController < ApplicationController
     end
 
     patch "/inventions/:id" do
-        @invention = Invention.find_by_id(params[:id])
+        @invention = Inventions.find_by_id(params[:id])
         params.delete("_method")
         @invention.update(params)
         if @invention.update(params)
