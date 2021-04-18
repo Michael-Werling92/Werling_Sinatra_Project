@@ -12,7 +12,7 @@ class InventionsController < ApplicationController
     get "inventions/new" do
         if logged_in?
             @invention = Inventions.find_by_id(params[:id])
-            erb :"inventions/show"
+            erb :"inventions/new"
         else
             redirect "/login"
         end
