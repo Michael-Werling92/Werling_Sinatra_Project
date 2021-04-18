@@ -7,5 +7,14 @@ class InventionsController < ApplicationController
         else
             redirect "/login"
         end
-    end    
+    end
+    
+    get "inventions/new" do
+        if logged_in?
+            @invention = Inventions.find_by_id(params[:id])
+            erb :"inventions/show"
+        else
+            redirect "/login"
+        end
+    end
 end
