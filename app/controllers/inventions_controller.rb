@@ -36,5 +36,17 @@ class InventionsController < ApplicationController
         end
     end
 
+    get "/inventions/:id/edit" do
+        if logged_in?
+            @invention = @Inventions.find_by_id(params[:id])
+            if @inventions.user_id != current_user.id || @invention.user_id == nil
+                redirect "/inventions"
+            else
+                erb: "inventions/edit"
+            end
+        else
+            redirect "/login"
+        end
+    end
 
 end
