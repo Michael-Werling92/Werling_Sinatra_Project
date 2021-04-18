@@ -5,13 +5,16 @@
 <ul><br>
 
     <% @invention.each do |invention| %>
-        <li>
-            <a href="/inventions/<%=invention.id%>">
+        
+            <%if invention.user_id == current_user.id%>
+            <li>
+                <a href="/inventions/<%=invention.id%>">
                 <%= invention.title%>
-            </a>
-        </li><br>
+                </a>
+            </li>
+            <%else%>
+                <p>  </p>
+            <%end%>
     <% end %>
     
-</ul><br><br>
-
-<a style="font-weight:bold" href="/inventions/new" > Click here to add a new invention.</a>
+</ul>

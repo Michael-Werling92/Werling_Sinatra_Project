@@ -1,14 +1,11 @@
 <h1><%= @invention.title %></h1>
 
 <br><br>
-<a href="/inventions" >Click here to view all of your inventions</a>
-<br><br>
 
     Title: <h3><%= @invention.title %></h3>
     Description: <h3><%= @invention.description %></h3>
     Relevant Field or Industry: <h3><%= @invention.relevant_field %></h3>
-    Date of Creation: <h3><%= @invention.date_of_conception %></h3>
-    Has a patent been filed? <h3><%= @invention.patent_filed %></h3>
+    Date of Creation: <h3><%= @invention.date_of_conception.strftime("%b %d, %Y")%></h3>
 
     <br><br>
 
@@ -19,5 +16,9 @@
     <h3>Click here to delete this invention.</h3>
         <form method="POST" action="/inventions/<%= @invention.id %>">
             <input type="hidden" id="hidden" name="_method" value="DELETE">
-            <input type="submit" value="DELETE">
-        </form>
+            <input type="submit" value="DELETE"><br><br>
+        </form><br><br>
+    
+    <a href="/inventions" >Click here to view all of your inventions</a>
+    
+    

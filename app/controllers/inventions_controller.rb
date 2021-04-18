@@ -63,7 +63,6 @@ class InventionsController < ApplicationController
 
     delete "/inventions/:id" do
         @invention = Inventions.find_by_id(params[:id])
-        binding.pry
         if @invention.user_id == current_user.id
             @invention.destroy
             redirect "/inventions"
