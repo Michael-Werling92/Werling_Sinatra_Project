@@ -17,4 +17,14 @@ class InventionsController < ApplicationController
             redirect "/login"
         end
     end
+
+    get "/inventions/:id" do
+        if logged_in?
+            @invention = Inventions.find_by_id(params[:id])
+            erb :"inventions/show"
+        else
+            redirect "/login"
+        end
+    end
+    
 end
