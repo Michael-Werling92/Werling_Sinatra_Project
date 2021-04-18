@@ -1,0 +1,3 @@
+class InventionsController < ApplicationController
+
+end
