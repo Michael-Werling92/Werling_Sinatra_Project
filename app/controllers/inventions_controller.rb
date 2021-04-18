@@ -26,5 +26,15 @@ class InventionsController < ApplicationController
             redirect "/login"
         end
     end
-    
+
+    post "/inventions"
+        invention = Inventions.new(params)
+        if invention.save
+            redirect "invention/#{invention.id}"
+        else
+            redirect "invention/new"
+        end
+    end
+
+
 end
