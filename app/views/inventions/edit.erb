@@ -1,1 +1,32 @@
-<h1> test </h1>
+<h1> EDIT THIS </h1>
+
+<h2> <%= @invention.title %> </h2>
+
+<form method="POST" action="/inventions/<%= @invention.id %>">
+    
+        <input type="hidden" id="hidden" name="_method" value="PATCH">
+
+    <p> Title: <input type="text" name="title" value="<%= @invention.title %>" ></p>
+    <p> Details: <input type="text" name="details" value="<%= @invention.details %>"></p>
+
+    <p> Relevant Field or Industry: <input type="text" name="relevant_field" value="<%= @invention.relevant_field %>"></p>
+    <br><br>
+    
+    Has a patent application been filed?:
+    <input type="radio" name="patent_filed" id="intrusiveChoice1" value="true">
+    <label for="intrusiveChoice1">YES</label>
+
+    <input type="radio" name="patent_filed" id="intrusiveChoice2" value="false">
+    <label for="intrusiveChoice2">NO</label>
+
+    <br><br>
+    
+
+
+    <input type="submit">
+
+
+
+
+
+</form>

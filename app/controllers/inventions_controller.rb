@@ -29,6 +29,7 @@ class InventionsController < ApplicationController
 
     post "/inventions" do
         invention = Inventions.new(params)
+        invention.user_id = current_user.id
         if invention.save
             redirect "inventions/#{invention.id}"
         else
@@ -48,5 +49,18 @@ class InventionsController < ApplicationController
             redirect "/login"
         end
     end
+
+    patch "/inventions/:id" do
+        @invention = Invention.find_by_id(params[:id])
+        params.delete("_method")
+        @invention.update(params)
+        if @invention.update(params)
+            redirect "inventions/#{@invention.id}"
+        else
+            redirect "inventions/new"
+        end
+    end
+
+
 
 end
