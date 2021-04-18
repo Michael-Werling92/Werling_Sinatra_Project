@@ -5,5 +5,5 @@ class Users < ActiveRecord::Base
 
     validates :username, :name, presence: true
 
-    validates :username, uniqueness :true
+    validates :username, uniqueness: true
 end
