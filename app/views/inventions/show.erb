@@ -1,0 +1,15 @@
+<h1><%= @invention.title%></h1>
+
+<h2>Description</h2>
+<p><%= @invention.description%></p>
+
+<h2> Relevant Field/Industry: </h2>
+<p><%= @invention.relevant_field%></p>
+
+<h2> Date of Conception </h2>
+<% if @invention.date_of_conception != nil %>
+    <p><%= @invention.date_of_conception.strftime("%A, %b %d") %></p>
+<% end %>
+
+<h2> Patent Filed? </h2>
+<p><%= @invention.patent_filed ? "Yes" : "No"%></p>
