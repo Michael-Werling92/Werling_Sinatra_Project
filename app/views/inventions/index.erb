@@ -4,17 +4,13 @@
 
 <ul><br>
 
-    <% @invention.each do |invention| %>
+    <% @inventions.each do |invention| %>
         
-            <%if invention.user_id == current_user.id%>
             <li>
                 <a href="/inventions/<%=invention.id%>">
                 <%= invention.title%>
                 </a>
             </li>
-            <%else%>
-                <p>  </p>
-            <%end%>
     <% end %>
     
 </ul>

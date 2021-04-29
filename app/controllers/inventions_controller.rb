@@ -2,7 +2,7 @@ class InventionsController < ApplicationController
 
     get "/inventions" do
         if logged_in?
-            @invention = Inventions.all
+            @inventions = current_user.inventions
             erb :"inventions/index"
         else
             redirect "/"
@@ -11,7 +11,7 @@ class InventionsController < ApplicationController
     
     get "/inventions/new" do
         if logged_in?
-            @invention = Inventions.find_by_id(params[:id])
+            @invention = Invention.find_by_id(params[:id])
             erb :"inventions/new"
         else
             redirect "/"
@@ -20,7 +20,7 @@ class InventionsController < ApplicationController
 
     get "/inventions/:id" do
         if logged_in?
-            @invention = Inventions.find_by_id(params[:id])
+            @invention = Invention.find_by_id(params[:id])
             erb :"inventions/show"
         else
             redirect "/"
@@ -28,7 +28,7 @@ class InventionsController < ApplicationController
     end
 
     post "/inventions" do
-        invention = Inventions.new(params)
+        invention = Invention.new(params)
         invention.user_id = current_user.id
         if invention.save
             redirect "inventions/#{invention.id}"
@@ -39,7 +39,7 @@ class InventionsController < ApplicationController
 
     get "/inventions/:id/edit" do
         if logged_in?
-            @invention = Inventions.find_by_id(params[:id])
+            @invention = Invention.find_by_id(params[:id])
             if @invention.user_id != current_user.id || @invention.user_id == nil
                 redirect "/inventions"
             else
@@ -51,9 +51,11 @@ class InventionsController < ApplicationController
     end
 
     patch "/inventions/:id" do
-        @invention = Inventions.find_by_id(params[:id])
+        @invention = Invention.find_by_id(params[:id])
+        if @invention.user_id != current_user.id
+            redirect "inventions"
+        end
         params.delete("_method")
-        @invention.update(params)
         if @invention.update(params)
             redirect "inventions/#{@invention.id}"
         else
@@ -62,7 +64,7 @@ class InventionsController < ApplicationController
     end
 
     delete "/inventions/:id" do
-        @invention = Inventions.find_by_id(params[:id])
+        @invention = Invention.find_by_id(params[:id])
         if @invention.user_id == current_user.id
             @invention.destroy
             redirect "/inventions"
@@ -70,7 +72,4 @@ class InventionsController < ApplicationController
             redirect "/inventions"
         end
     end
-
-
-
 end

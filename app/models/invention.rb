@@ -1,4 +1,4 @@
-class Inventions < ActiveRecord::Base
+class Invention < ActiveRecord::Base
     belongs_to :user
 
     validates :title, :description, :relevant_field, presence: true
