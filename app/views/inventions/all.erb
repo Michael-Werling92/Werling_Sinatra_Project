@@ -1,4 +1,4 @@
-<h1> Find all of your inventions listed below: </h1>
+<h1> Find all inventions on the site below: </h1>
 
 <a style="font-weight:bold" href="/inventions/new" > Click here to add a new invention.</a><br><br>
 
@@ -8,7 +8,7 @@
         
             <li>
                 <%= invention.title%>
-                created by: <%= invention.user%>
+                <%= invention.user.try(:username)%>
             </li>
     <% end %>
     

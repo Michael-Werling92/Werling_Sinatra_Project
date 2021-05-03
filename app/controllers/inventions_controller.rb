@@ -7,13 +7,21 @@ class InventionsController < ApplicationController
         else
             redirect "/"
         end
-    end
-    
+    end    
 
     get "/inventions/new" do
         if logged_in?
-            @inventions = Invention.find_by_id(params[:id])
             erb :"inventions/new"
+        else
+            redirect "/"
+        end
+    end
+
+    get "/inventions/all" do
+        @inventions = Invention.all
+        if logged_in?
+            @inventions
+            erb :"inventions/all"
         else
             redirect "/"
         end
@@ -21,12 +29,13 @@ class InventionsController < ApplicationController
 
     get "/inventions/:id" do
         if logged_in?
-            @invention = current_user.inventions
+            @invention = current_user.inventions.find_by_id(params[:id])
             erb :"inventions/show"
         else
             redirect "/"
         end
     end
+
 
     post "/inventions" do
         invention = Invention.new(params)
@@ -40,25 +49,20 @@ class InventionsController < ApplicationController
 
     get "/inventions/:id/edit" do
         if logged_in?
-            @inventions = Invention.find_by_id(params[:id])
-            if @inventions.user_id != current_user.id || @inventions.user_id == nil
-                redirect "/inventions"
-            else
-                erb :"inventions/edit"
-            end
+            @invention = Invention.find_by_id(params[:id])
+            redirect_if_not_authorized
+            erb :"inventions/edit"
         else
             redirect "/"
         end
     end
 
     patch "/inventions/:id" do
-        @inventions= Invention.find_by_id(params[:id])
-        if @inventions.user_id != current_user.id
-            redirect "inventions"
-        end
+        @invention= Invention.find_by_id(params[:id])
+        redirect_if_not_authorized
         params.delete("_method")
-        if @inventions.update(params)
-            redirect "inventions/#{@inventions.id}"
+        if @invention.update(params)
+            redirect "inventions/#{@invention.id}"
         else
             redirect "inventions/new"
         end
@@ -66,21 +70,16 @@ class InventionsController < ApplicationController
 
     delete "/inventions/:id" do
         @invention = Invention.find_by_id(params[:id])
-        if @invention.user_id == current_user.id
-            @invention.destroy
-            redirect "/inventions"
-        else
+        redirect_if_not_authorized
+        @invention.destroy
+        redirect "/inventions"
+    end
+
+    private
+    def redirect_if_not_authorized
+        if @invention == nil || @invention.user_id != current_user.id
             redirect "/inventions"
         end
     end
 
-    get "/inventions/all" do
-        @inventions = Invention.all
-        if logged_in?
-            @inventions
-            erb :"inventions/all"
-        else
-            redirect "/"
-        end
-    end
 end
